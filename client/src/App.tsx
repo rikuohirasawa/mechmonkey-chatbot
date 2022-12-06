@@ -2,14 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 
+import { ChatBotToggleBtn } from './chatBotToggle/ChatBotToggleBtn'
+
 interface MessageData {
   sentBy: string,
   content: string
 }
-
+interface DefaultMessage {
+  greeting: string,
+  options: string[]
+}
 export const App: React.FC = () => {
   const [input, setInput] = useState<string>('');
-  const [chatData, setChatData] = useState<MessageData[]>([]);
+  const [chatData, setChatData] = useState<MessageData[]>([{sentBy: 'default', content: 'hi'}]);
   const chatRef = useRef<MessageData[]>([]);
 
   useEffect(()=>{
@@ -75,6 +80,7 @@ export const App: React.FC = () => {
         <button type='submit'>Send</button>
       </div>
     </form>
+    <ChatBotToggleBtn/>
     </Wrapper>
   )
 }
@@ -82,8 +88,11 @@ export const App: React.FC = () => {
 export default App;
 
 const Wrapper = styled.div`
-width: 500px;
-margin: 0 auto;
+  border-radius: 16px;
+  width: 600px;
+  margin: 0 auto;
+  background-color: var(--mm-black);
+  padding: 18px;
 
 form {
   width: 100%;
