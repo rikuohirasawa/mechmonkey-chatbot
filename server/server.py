@@ -3,6 +3,9 @@ import nltk
 import difflib
 from nltk.sentiment import SentimentIntensityAnalyzer
 from flask_cors import CORS
+from options import options_data
+
+nltk.download('vader_lexicon')
 
 keywords = ["product", "blog", "contact", "about", "register", "sign"]
 
@@ -11,8 +14,7 @@ CORS(app)
 
 @app.route("/test", methods=["GET"])
 def hello():
-    greeting = jsonify('hello')
-    return Response("{'hello': 'hi'}",status=200,mimetype='application/json')
+    return Response(jsonify({'hello': 'hi'}),status=200,mimetype='application/json')
 
 @app.route("/user-msg", methods=["POST"])
 def userMsg():
@@ -47,6 +49,14 @@ def userMsg():
         else:
             print(remove_duplicates)
             return jsonify({'content': None, 'sentBy': 'server'})
+
+@app.route("/options", methods=["GET"])
+def click_option():
+    data = request.args.get('option')
+    print(data)
+    for option in options_data:
+        if option == data.replace(" ", "_").lower():
+            return jsonify({'content': options_data[option], 'sentBy': 'server'})
             
 if __name__ == "__main__":
     app.run("localhost", 8000)

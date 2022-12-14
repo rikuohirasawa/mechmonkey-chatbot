@@ -5,7 +5,7 @@ import { BsFillChatTextFill, BsChatFill } from 'react-icons/bs'
 export const ChatBotToggleBtn: React.FC = () => {
     return (
         <Wrapper>
-            <ToggleBtn><span className='pos-abs'>Chat</span><BsChatFill color="var(--mm-orange)" size={70}/></ToggleBtn>
+            <ToggleBtn><span className='pos-abs'>Chat</span><BsChatFill/></ToggleBtn>
         </Wrapper>
     )
 }
